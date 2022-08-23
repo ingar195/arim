@@ -13,3 +13,5 @@ Simple API to mqtt for Årim
 6. Double press it and copy the url to the config
 7. Edit the config to your MQTT settings
 8. Instal needed requirements ```pip install -r requirements.txt```
+
+I run the script once a day with cron on ubuntu 
