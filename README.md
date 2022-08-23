@@ -5,7 +5,7 @@
 Simple API to mqtt for Årim
 
 ## How to setup
-1. Navigate to (Link)[https://arim.no/#pickupDayAddress]
+1. Navigate to [Årim's web page](https://arim.no/#pickupDayAddress)
 2. Inspect element before entering your address
 3. Go network tab
 4. Search you address
