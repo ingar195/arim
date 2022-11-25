@@ -2,9 +2,11 @@ import requests
 import logging
 import json
 import mqtt
+import time
+from datetime import datetime
 
 # Logging setup
-log_file = "tessie.log"
+log_file = "arim.log"
 
 logging.basicConfig(
     format='%(asctime)s %(levelname)-8s [%(filename)s:%(lineno)d] %(message)s',
@@ -54,19 +56,33 @@ def parse():
         frak = x["FraksjonId"]
         date = x["Tommedatoer"][0].split("T")[0]
 
+        
+        pattern = '%Y-%m-%d'
+        epoch = int(time.mktime(time.strptime(date, pattern)))
+        logging.debug(epoch)
+
+        now = datetime.now()
+        current_epoch = time.mktime(now.timetuple())
+
+        logging.info(f"Current epoch: {current_epoch}")
+        logging.info(f"Epoch: {epoch}")
+        if epoch <= current_epoch:
+            date = x["Tommedatoer"][1].split("T")[0]
+            epoch = int(time.mktime(time.strptime(date, pattern)))
+            logging.info("Changed to next pickupday")
+
         if frak == 1:
             logging.debug(f"waste: {date}")
-            send_messages("waste", date)
+            send_messages("waste/date", date)
+            send_messages("waste/epoch", epoch)
 
         elif frak == 2:
             logging.debug(f"cardboard: {date}")
-            send_messages("cardboard", date)
+            send_messages("cardboard/date", date)
+            send_messages("cardboard/epoch", epoch)
             
         elif frak == 4:
             logging.debug(f"metal: {date}")
-            send_messages("metal", date)
-
- 
-
-
+            send_messages("metal/date", date)
+            send_messages("metal/epoch", epoch)
 parse()
