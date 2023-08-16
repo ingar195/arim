@@ -52,9 +52,11 @@ def send_messages(type, date):
 
 
 def parse():
+    
     for x in get_pickup_dates():
-        frak = x["FraksjonId"]
-        date = x["Tommedatoer"][0].split("T")[0]
+        logging.debug(x)
+        frak = x["fraksjonId"]
+        date = x["tommedatoer"][0].split("T")[0]
 
         
         pattern = '%Y-%m-%d'
@@ -67,7 +69,7 @@ def parse():
         logging.info(f"Current epoch: {current_epoch}")
         logging.info(f"Epoch: {epoch}")
         if epoch <= current_epoch:
-            date = x["Tommedatoer"][1].split("T")[0]
+            date = x["tommedatoer"][1].split("T")[0]
             epoch = int(time.mktime(time.strptime(date, pattern)))
             logging.info("Changed to next pickupday")
 
