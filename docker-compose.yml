@@ -1,0 +1,6 @@
+version: '3'
+services:
+  aarim:
+    image: ingar195/aarim:latest
+    volumes:
+      - ./config:/arim/config

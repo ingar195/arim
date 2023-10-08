@@ -20,7 +20,7 @@ logging.info("------------------------------------------------------")
 logging.debug("Logger initialized")
 
 
-def read_config(config_json="/home/user/arim_api/config.json"):
+def read_config(config_json="/arim/config/config.json"):
     """
     Reads the config file and returns token and VIN
     """
@@ -87,4 +87,6 @@ def parse():
             logging.debug(f"metal: {date}")
             send_messages("metal/date", date)
             send_messages("metal/epoch", epoch)
-parse()
+while True:
+    parse()
+    time.sleep(3600)

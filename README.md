@@ -11,10 +11,8 @@ Simple API to mqtt for Årim
 4. Search you address
 5. You should now have an entry thats starts with ```pickupDays?days=365&region_id=```
 6. Double press it and copy the url to the config
-7. Edit the config to your MQTT settings
-8. Instal needed requirements ```pip install -r requirements.txt```
-
-I run the script once a day with cron on ubuntu 
+7. Edit the config to your MQTT settings and your arim URL
+8. Start the docker compose file
 
 
 ## Home Assistant
@@ -23,9 +21,15 @@ Added the to Home Assistant like this
 mqtt:
   sensor:
     - name: "Waste date"
-      state_topic: "arim/waste"
+      state_topic: "arim/waste/date"
+    - name: "Waste epoch"
+      state_topic: "arim/waste/epoch"
     - name: "Cardboard date"
-      state_topic: "arim/cardboard"
+      state_topic: "arim/cardboard/date"
+    - name: "Cardboard epoch"
+      state_topic: "arim/cardboard/epoch"
     - name: "Metal date"
-      state_topic: "arim/metal"
+      state_topic: "arim/metal/date"
+    - name: "Metal epoch"
+      state_topic: "arim/metal/epoch"
 ``` 
